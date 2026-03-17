@@ -1,6 +1,24 @@
-#BibleAddon
+#BibleAddon - 64 bits
 
+Fork de [carcheco/BibleAddon](https://github.com/carcheco/BibleAddon) con soporte para NVDA 64 bits (2024.1 en adelante).
 
+## Cambios respecto al original
+Se eliminó el directorio `sqlite311/` que contenía binarios compilados para 32 bits (`_sqlite3.pyd` y `sqlite3.dll`). Ahora se usa el módulo `sqlite3` estándar de Python, que ya viene incluido en NVDA 2024+ (Python 3.11 64-bit).
+
+## Compilar el complemento
+Requisitos: Python 3.11+, [SCons](https://scons.org/), y el paquete `markdown`.
+
+```
+pip install scons markdown
+scons
+```
+
+Esto genera el archivo `BibleAddon-<version>.nvda-addon` en la raíz del proyecto.
+
+## Instalar
+Abre el archivo `.nvda-addon` generado con NVDA en ejecución, o ve a NVDA > Herramientas > Administrador de complementos > Instalar y selecciona el archivo.
+
+## Descripción
 BibleAddon es un complemento que te permite a través de una interfaz fácil e intuitiva leer un libro por capítulos ya sea del antiguo o nuevo testamento, cargando para ello en memoria el texto bíblico desde una base de datos SQLite.
 
 Inicialmente este complemento no tiene asignada una combinación de teclas para llamarlo, para asignarle una de esta, hacer lo siguiente:
@@ -68,8 +86,4 @@ Para cargar una versión distinta debes ir a la carpeta BibleAddon, mover a otra
 
 
 ## Descarga del complemento.
-Puedes descargar este complemento desde Drive de Google haciendo [click en este  enlace][1].
-
-Este es un enlace de descarga directa por lo que una vez presionado, puede que no te anuncie que la descarga está en progreso o que ha terminado, por lo que deberás ir con la tecla control mas la letra "J" al historial de descargas para verificar  su finalización.
-
-[1]: https://drive.google.com/uc?export=download&id=15czaPiv9dd6oo5cXoDEDQIaa_dGz3kaw
+Puedes descargar este complemento desde la sección [Releases](https://github.com/xjwalker/BibleAddon-64bits/releases) de este repositorio.
