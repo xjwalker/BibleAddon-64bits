@@ -4,7 +4,7 @@
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
-from . import sqlite311 as sqlite3
+import sqlite3
 from logHandler import log
 
 class DaoBible():
