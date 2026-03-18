@@ -28,7 +28,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
         self._createdMenu() # Función que crea el item Para llamar el adddon desde el menú herramientas de NVDA.
         self.dialogStarted= False # Variable que permite no volver a llamar al addon cuando este está ya abierto. 
         
-    @script(description= _("Llama al complementoBibleAddon"), category= _("BibleAddon")) 
+    @script(description= _("Llama al complemento BibleAddon"), category= _("BibleAddon"))
     def script_Run(self, event):
         if self.dialogStarted == False:
             self.pathDb= self._getPathArchiveBbl()
@@ -202,7 +202,7 @@ class BibleDialog(wx.Dialog):
             self.verses.SetValue(self.getVerses())
             #SetPage(self.getVerses())
         else:
-            wx.MessageBox(_("No existe una Biblia para abrir"), "_(Atención)", wx.OK | wx.ICON_ERROR)
+            wx.MessageBox(_("No existe una Biblia para abrir"), _("Atención"), wx.OK | wx.ICON_ERROR)
 
     # Definicion de  metodos de los widget que generan un evento.
     def selectedTestament(self, event):
@@ -297,7 +297,7 @@ class BibleDialog(wx.Dialog):
 
     def sayNameBook(self, event):
         """ Metodo que verbaliza el nombre y capítulo del libro actual. """
-        msg= self.nameBook +_("Capítulo ") + str(self.chapter)
+        msg= self.nameBook + " " +_("Capítulo ") + str(self.chapter)
         ui.message(msg)
 
     def getVerses(self):
@@ -346,7 +346,7 @@ class BibleDialog(wx.Dialog):
             except(IOError, json.JSONDecodeError) as e:
                 log.error(_(f"error al cargar configuración guardada. {e}"))
                 os.remove(self.fileSettings)
-                self.saveSettings(defaultBook, defaultChapter, defaultNumChapters)
+                self.saveSettings(defaultBook, defaultChapter)
                 return defaultBook, defaultChapter
         else:
             self.saveSettings(defaultBook, defaultChapter)
