@@ -46,7 +46,7 @@ bibleBooks= (
     {"ID": "33", "LIBRO": _("Miqueas"), "NUM_CAP": "7", "PACTO": "AT"},
     {"ID": "34", "LIBRO": _("Nahúm"), "NUM_CAP": "3", "PACTO": "AT"},
     {"ID": "35", "LIBRO": _("Habacuc"), "NUM_CAP": "3", "PACTO": "AT"},
-    {"ID": "36", "LIBRO": ("Sofonías"), "NUM_CAP": "3", "PACTO": "AT"},
+    {"ID": "36", "LIBRO": _("Sofonías"), "NUM_CAP": "3", "PACTO": "AT"},
     {"ID": "37", "LIBRO": _("Hageo"), "NUM_CAP": "2", "PACTO": "AT"},
     {"ID": "38", "LIBRO": _("Zacarías"), "NUM_CAP": "14", "PACTO": "AT"},
     {"ID": "39", "LIBRO": _("Malaquías"), "NUM_CAP": "4", "PACTO": "AT"},

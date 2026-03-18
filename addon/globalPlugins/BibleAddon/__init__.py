@@ -16,19 +16,24 @@ import wx  # Paquete para desarrollo de interfaz grafica.
 from . striprtf.striprtf import rtf_to_text # Modulo para convertir de formato RTF a texto.
 import os # Modulo que contiene entre otras cosas, funciones que permite establecer una ruta de carpetas.
 import json # modulo para gestionar  el archivo settings.json. 
-# Importamos los modulos propios del Add-on.
-from .varsBible import * # Modulo que Contiene  como constantes   los libros de La Biblia.
-from .daoBible import * # Modulo para implementar el patrón DAO.
+# Inicializamos la traducción ANTES de importar los modulos propios del Add-on,
+# ya que varsBible.py usa _() a nivel de módulo para los nombres de los libros.
+addonHandler.initTranslation()
 
-addonHandler.initTranslation() # Inicializa la traducción de este complemento ya que tiene texto apto para traducir.
+# Importamos los modulos propios del Add-on.
+from . import varsBible # Modulo que Contiene como constantes los libros de La Biblia.
+from . import daoBible # Modulo para implementar el patrón DAO.
 
 class GlobalPlugin(globalPluginHandler.GlobalPlugin):
+    # scriptCategory es necesario para que el addon aparezca en Preferencias > Gestos de entrada.
+    scriptCategory= _("BibleAddon")
+
     def __init__(self, *args, **kwds):
         super(GlobalPlugin, self).__init__(*args, **kwds)
         self._createdMenu() # Función que crea el item Para llamar el adddon desde el menú herramientas de NVDA.
-        self.dialogStarted= False # Variable que permite no volver a llamar al addon cuando este está ya abierto. 
-        
-    @script(description= _("Llama al complemento BibleAddon"), category= _("BibleAddon"))
+        self.dialogStarted= False # Variable que permite no volver a llamar al addon cuando este está ya abierto.
+
+    @script(description= _("Llama al complemento BibleAddon"))
     def script_Run(self, event):
         if self.dialogStarted == False:
             self.pathDb= self._getPathArchiveBbl()
@@ -42,6 +47,13 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
             wx.CallAfter(_dialogRun) # Una manera de llamar al dialogo sin usar el modulo Thread directamente.
         else:
             ui.message(_("Ya hay una instancia de BibleAddon activa."))
+
+    def terminate(self):
+        """Limpieza al descargar el plugin."""
+        try:
+            self.menuTools.Remove(self.itemBibleAddon)
+        except Exception:
+            pass
 
     def _createdMenu(self):
         """Función privada para colocar el item del BibleAddon en el menú herramientas de NVDA"""
